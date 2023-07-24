@@ -38,36 +38,6 @@ const App = () => {
 
   };
 
-  const UserSchema = Yup.object().shape({
-    name: Yup.string().min(5, 'Too Short!').max(50, 'Too Long!').required('First name'),
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
-      .min(8, 'Password must have at least 8 characters')
-      .matches(/[0-9]/, 'Must have a number')
-      .matches(/[a-z]/, 'Must have at least one lowercase')
-      .matches(/[A-Z]/, 'Must have at least one uppercase')
-      .matches(/[!@#%^&*]/, 'Must have at least one special character'),
-    confirmPassword: Yup.string().required('Must have a confirm password').oneOf([Yup.ref('password'), null], 'Password does not match'),
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    },
-
-    validationSchema: UserSchema,
-
-    // onSubmit: (values) => {
-    //   console.log(values);
-    //   // UserDataService.create(values).then...
-    // }
-  });
-
-  const { errors, touched, isSubmitting } = formik;
-
   return (
     <Container>
       <Box sx={{ textAlign: 'center' }}>
